@@ -16,24 +16,33 @@ class MyApp extends StatelessWidget {
           leading: Icon(Icons.home),
           backgroundColor: Colors.black26,
         ),
-        body: Container(
-          //height: 100,
-          width: 100,
-          margin: EdgeInsets.all(20),
-          alignment: Alignment.center,
-          child: Text("Hey Coders!!!"),
-          decoration: BoxDecoration(
-            border: Border.all(width: 4,color: Colors.black),
-            color: Colors.orangeAccent,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.orange, offset: Offset(6.0,6.0),
-              )
-            ]
-          ),
-          transform: Matrix4.rotationZ(0.1),
-          constraints: BoxConstraints.expand(height: 50.0),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Container(
+              height: 50,
+              width: 100,
+              color: Colors.orange,
+              margin: EdgeInsets.all(10),
+              child: Text("CodeWarriors"),
+            ),
+            Container(
+              height: 50,
+              width: 100,
+              color: Colors.orange,
+              margin: EdgeInsets.all(10),
+              child: Text("Hey"),
+            ),
+            Container(
+              height: 50,
+              width: 100,
+              color: Colors.orange,
+              margin: EdgeInsets.all(10),
+              child: Text("Coders!!!"),
+            )
+          ],
         ),
       ),
     );
