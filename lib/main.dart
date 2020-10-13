@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "App 4", //Title of the App
+      title: "App 5", //Title of the App
       home: Scaffold( //This is the widget that construct the homepage
         backgroundColor: Colors.grey,
         appBar: AppBar(
@@ -86,24 +86,30 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 30,top: 30, right: 30),
-                alignment: Alignment.center,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Text("Update", style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.italic
-                    ),
-                  ),
-                ),
+              FlatButton(
+                child: Text("Update", style: TextStyle(fontSize: 20,)),
+                onPressed: (){},
+                color: Colors.lightBlueAccent,
+                textColor: Colors.white,
               ),
+              RaisedButton(
+                child: Text("Update", style: TextStyle(fontSize: 20,)),
+                onPressed: (){},
+                color: Colors.lightBlueAccent,
+                textColor: Colors.white,
+                splashColor: Colors.green,
+              ),
+              FloatingActionButton(
+                child: Icon(Icons.save),
+                onPressed: (){},
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.yellow,
+              ),
+              FloatingActionButton.extended(
+                onPressed: null,
+                label: Text("Save"),
+                icon: Icon(Icons.save),
+              )
             ],
           ),
         ),
