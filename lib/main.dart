@@ -9,65 +9,78 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "App 6", //Title of the App
+      title: "App 7", //Title of the App
       home: Scaffold( //This is the widget that construct the homepage
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Day 10"), //Title of our homepage
+          title: Text("Forms"), //Title of our homepage
           backgroundColor: Colors.black26,
         ),
-        body: Center(
-          child: Stack(
-            alignment: Alignment.center,
-            textDirection: TextDirection.rtl,
-            fit: StackFit.passthrough,
-            overflow: Overflow.clip,
-            children: [
-              Container(
-                  height: 300,
-                  width: 400,
-                  color: Colors.green,
-                  child: Center(
-                    child: Text(
-                      "Hello",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  )
-              ),
-              Positioned(
-                top: 30,
-                right: 20,
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.orange,
-                  child: Center(
-                    child: Text(
-                      "Coders",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 30,
-                left: 20,
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.orange,
-                  child: Center(
-                    child: Text(
-                      "Coders",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        body: Forms()
       )
+    );
+  }
+}
+
+class Forms extends StatefulWidget {
+  @override
+  _FormsState createState() => _FormsState();
+}
+class _FormsState extends State<Forms> {
+  final keys = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context){
+    return Form(
+      key: keys,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Enter yor name",
+              labelText: "Name",
+              icon: Icon(Icons.person),
+            ),
+            validator: (value){
+              if(value.isEmpty){
+                return 'Please fill the details';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Enter your password",
+              labelText: "Password",
+              icon: Icon(Icons.lock),
+            ),
+            validator: (value){
+              if(value.isEmpty){
+                return 'Please fill the details';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Github link",
+              labelText: "Github",
+              icon: Icon(Icons.link),
+            ),
+          ),
+          Container(
+            child: RaisedButton(
+              child: Text("Submit"),
+              onPressed: (){
+                if(keys.currentState.validate()){
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Validation Going on")));
+                }
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }
