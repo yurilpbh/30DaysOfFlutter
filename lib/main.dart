@@ -9,11 +9,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "App 8", //Title of the App
+      title: "App 9", //Title of the App
       home: Scaffold( //This is the widget that construct the homepage
         backgroundColor: Colors.grey,
         appBar: AppBar(
-          title: Text("Day 12"), //Title of our homepage
+          title: Text("Day 13"), //Title of our homepage
           backgroundColor: Colors.black54,
         ),
         body: Padding(
@@ -50,6 +50,16 @@ class MyApp extends StatelessWidget {
                       textDirection: TextDirection.rtl
                   ),
                   Text("Delete"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      FadeInImage.assetNetwork(placeholder: 'assets/download.jpg', image: 'http://source.unsplash.com/random?id=5', width: 200,),
+                    ],
+                  ),
                 ],
               ),
             ],
