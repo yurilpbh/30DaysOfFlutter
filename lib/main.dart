@@ -9,60 +9,53 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "App 9", //Title of the App
+      title: "App 10", //Title of the App
       home: Scaffold( //This is the widget that construct the homepage
         backgroundColor: Colors.grey,
         appBar: AppBar(
-          title: Text("Day 13"), //Title of our homepage
+          title: Text("Day 14"), //Title of our homepage
           backgroundColor: Colors.black54,
         ),
         body: Padding(
           padding: const EdgeInsets.all(28.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Icon(Icons.home,
-                    color: Colors.green,
-                    size: 40,
-                    textDirection: TextDirection.rtl
-                  ),
-                  Text("Home"),
-                ],
+          child: Center(
+            child: Container(
+              height: 200,
+              width: 300,
+              child: Card(
+                color: Colors.yellow,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: ListTile(
+                        leading: Icon(Icons.person, size: 40, color: Colors.blue,),
+                        title: Text("Yuri Pereira", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black)),
+                        subtitle: Text("COO", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+                      ),
+                    ),
+                    ButtonBar(
+                      children: [
+                        RaisedButton(
+                          child: FloatingActionButton.extended(onPressed: (){},label: Text("Contact"), icon: Icon(Icons.call)),
+                          color: Colors.blue,
+                          onPressed: (){}
+                        ),
+                        RaisedButton(
+                            child: Text("Link"),
+                            color: Colors.blue,
+                            onPressed: (){}
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Icon(Icons.access_alarm,
-                      color: Colors.red,
-                      size: 40,
-                      textDirection: TextDirection.rtl
-                  ),
-                  Text("Alarm"),
-                ],
-              ),
-              Column(
-                children: [
-                  Icon(Icons.delete,
-                      color: Colors.black,
-                      size: 40,
-                      textDirection: TextDirection.rtl
-                  ),
-                  Text("Delete"),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      FadeInImage.assetNetwork(placeholder: 'assets/download.jpg', image: 'http://source.unsplash.com/random?id=5', width: 200,),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
         )
       )
