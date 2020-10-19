@@ -18,17 +18,55 @@ class myApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("GridView List"),
+          title: Text("Horizontal List"),
         ),
-        body: GridView.count(
-            crossAxisCount: 2,
-          children: List.generate(datas.length, (index) {
-            return Center(
-              child: newcard(
-                datas: datas[index],
+        body: Container(
+          height: 150.0,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Container(
+                width: 148.0,
+                color: Colors.yellow,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                  ),
+                ),
               ),
-            );
-          }),
+              Container(
+                width: 148.0,
+                color: Colors.red,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.accessible),
+                    title: Text("Acessibility"),
+                  ),
+                ),
+              ),
+              Container(
+                width: 148.0,
+                color: Colors.green,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.cached),
+                    title: Text("Update"),
+                  ),
+                ),
+              ),
+              Container(
+                width: 148.0,
+                color: Colors.blue,
+                child: Center(
+                  child: ListTile(
+                    leading: Icon(Icons.g_translate),
+                    title: Text("Translate"),
+                  ),
+                ),
+              ),
+            ],
+          ),
         )
       ),
     );
