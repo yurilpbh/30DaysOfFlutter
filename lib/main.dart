@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 void main(){
   runApp(MyApp());
@@ -9,44 +9,82 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Day21"),
-        ),
-        //body: Linear_progress_bar(),
-        //body: Circular_progress_bar(),
-        body: Snack_bar(),
-      ),
+      home: ImageSlider(),
+      //home: slider(),
+      //home: tooltip_widget(),
     );
   }
 }
 
-class Linear_progress_bar extends StatefulWidget {
-  @override
-  _Linear_progress_barState createState() => _Linear_progress_barState();
-}
-
-class _Linear_progress_barState extends State<Linear_progress_bar> {
-  bool loading = false;
+class tooltip_widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Container(
-              margin: EdgeInsets.all(20),
-              child: loading?LinearProgressIndicator():Text("Please Click to download"),
+      appBar: AppBar(
+        title: Text("Tooltip"),
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Tooltip(
+          message: "Set Alarm",
+          waitDuration: Duration(seconds: 2),
+          showDuration: Duration(seconds: 3),
+          textStyle: TextStyle(
+            fontSize: 20,
+            color: Colors.white
+          ),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadiusDirectional.circular(20)
+          ),
+          child: FlatButton(
+            child: Icon(
+              Icons.alarm,
+              size: 150,
             ),
           ),
-          RaisedButton(
-            child: Text("Download"),
-            color: Colors.blue,
-            onPressed: (){
-              setState(() {
-                loading = !loading;
-              });
-            },
+        ),
+      ),
+    );
+  }
+}
+class slider extends StatefulWidget {
+  @override
+  _sliderState createState() => _sliderState();
+}
+
+class _sliderState extends State<slider> {
+  int _value=6;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Slider"),
+      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left:20),
+            child: Icon(
+              Icons.volume_up,
+              size: 50,
+            ),
+          ),
+          Expanded(
+            child: Slider(
+              value: _value.toDouble(),
+              min: 1,
+              max: 20,
+              activeColor: Colors.green,
+              inactiveColor: Colors.grey,
+              label: "Set up volume",
+              onChanged: (double newvalue){
+                setState(() {
+                  _value = newvalue.round();
+                });
+              },
+            ),
           )
         ],
       ),
@@ -54,37 +92,27 @@ class _Linear_progress_barState extends State<Linear_progress_bar> {
   }
 }
 
-class Circular_progress_bar extends StatelessWidget {
+class ImageSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.grey,
-          strokeWidth: 4,
-        ),
+    return Container(
+      padding: EdgeInsets.all(40),
+      child: imageSlider(context),
+      constraints: BoxConstraints.expand(
+        height: 200
       ),
     );
   }
 }
 
-class Snack_bar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: RaisedButton(
-          child: Text("Snack Bar"),
-          color: Colors.green,
-          onPressed: (){
-            final msg = SnackBar(
-              content: Text("This is notification"),
-              duration: Duration(seconds: 1),
-            );
-            Scaffold.of(context).showSnackBar(msg);
-          },
-        ),
-      ),
-    );
-  }
+Swiper imageSlider(BuildContext context){
+  return new Swiper(
+    autoplay: true,
+    itemCount: 10,
+    itemBuilder: (BuildContext context, int index){
+      return Image.network(
+        "https://images.unsplash.com/photo-1500283281129-71909ce26948?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9"
+      );
+    },
+  );
 }
