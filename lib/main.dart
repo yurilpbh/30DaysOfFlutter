@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main(){
   runApp(MyApp());
@@ -8,139 +10,48 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: table_Widget()
+      home: calendar_Widget()
       //home: switch_Widget(),
     );
   }
 }
 
-class switch_Widget extends StatefulWidget {
+class calendar_Widget extends StatefulWidget {
   @override
-  _switch_WidgetState createState() => _switch_WidgetState();
+  _calendar_WidgetState createState() => _calendar_WidgetState();
 }
 
-class _switch_WidgetState extends State<switch_Widget> {
-  bool switchState = false;
-  var textValue = "Switch is OFF";
-  void display_state(bool value){
-    setState(() {
-      switchState = !switchState;
-      textValue = switchState == false ? "Switch is OFF" : "Switch is ON";
-    });
+class _calendar_WidgetState extends State<calendar_Widget> {
+  CalendarController _controller;
+  void initState(){
+    super.initState();
+    _controller = CalendarController();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Switch - Day 23"),
+        title: Text("Calendar - Day 24"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Container(
-              child: Transform.scale(
-                scale: 2,
-                child: Switch(
-                  onChanged: display_state,
-                  value: switchState,
-                  activeColor: Colors.green,
-                  inactiveThumbColor: Colors.red,
-                  activeTrackColor: Colors.greenAccent,
-                  inactiveTrackColor: Colors.redAccent,
-                ),
+          TableCalendar(
+            initialCalendarFormat: CalendarFormat.month,
+            calendarController: _controller,
+            calendarStyle: CalendarStyle(
+              selectedColor: Colors.deepPurpleAccent,
+              todayColor: Colors.blueAccent.shade100
+            ),
+            headerStyle: HeaderStyle(
+              centerHeaderTitle: true,
+              formatButtonDecoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadiusDirectional.circular(20)
               ),
+              formatButtonShowsNext: false,
             ),
-          ),
-          Text('$textValue')
+          )
         ],
-      ),
-    );
-  }
-}
-
-class table_Widget extends StatefulWidget {
-  @override
-  _table_WidgetState createState() => _table_WidgetState();
-}
-
-class _table_WidgetState extends State<table_Widget> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Table - Day 23"),
-      ),
-      body: Container(
-        margin: EdgeInsets.all(10),
-        child: Table(
-          defaultColumnWidth: FixedColumnWidth(100),
-          border: TableBorder.all(
-            color: Colors.blue,
-            width: 4,
-            style: BorderStyle.solid
-          ),
-          children: [
-            TableRow(
-              children: [
-                Column(
-                  children: [
-                    Text("Cel1")
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text("Cel2")
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text("Cel3")
-                  ],
-                ),
-              ]
-            ),
-            TableRow(
-                children: [
-                  Column(
-                    children: [
-                      Text("Cel4")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Cel5")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Cel6")
-                    ],
-                  ),
-                ]
-            ),
-            TableRow(
-                children: [
-                  Column(
-                    children: [
-                      Text("Cel7")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Cel8")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Cel9")
-                    ],
-                  ),
-                ]
-            ),
-          ],
-        ),
       ),
     );
   }
