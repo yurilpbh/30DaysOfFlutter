@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 void main(){
   runApp(MyApp());
@@ -10,48 +8,80 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: calendar_Widget()
-      //home: switch_Widget(),
+      //home: FirstScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context)=>FirstScreen(),
+        '/second': (context)=>SecondScreen(),
+        '/third' : (context)=>ThirdScreen()
+      },
     );
   }
 }
 
-class calendar_Widget extends StatefulWidget {
-  @override
-  _calendar_WidgetState createState() => _calendar_WidgetState();
-}
-
-class _calendar_WidgetState extends State<calendar_Widget> {
-  CalendarController _controller;
-  void initState(){
-    super.initState();
-    _controller = CalendarController();
-  }
+class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calendar - Day 24"),
+        title: Text("FirstScreen - Day 25"),
       ),
-      body: Column(
-        children: [
-          TableCalendar(
-            initialCalendarFormat: CalendarFormat.month,
-            calendarController: _controller,
-            calendarStyle: CalendarStyle(
-              selectedColor: Colors.deepPurpleAccent,
-              todayColor: Colors.blueAccent.shade100
-            ),
-            headerStyle: HeaderStyle(
-              centerHeaderTitle: true,
-              formatButtonDecoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadiusDirectional.circular(20)
-              ),
-              formatButtonShowsNext: false,
-            ),
-          )
-        ],
+      body: Center(
+        child: Container(
+          child: RaisedButton(
+            child: Text("Click to go the second Page"),
+            color: Colors.blueAccent,
+            onPressed: (){
+              Navigator.pushNamed(context, '/second');
+              //Navigator.push(context, MaterialPageRoute(
+                //builder: (context)=>SecondScreen()));
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("SecondScreen - Day 25"),
+      ),
+      body: Center(
+        child: Container(
+          child: RaisedButton(
+            color: Colors.redAccent,
+            child: Text("Click to go the third Page"),
+            onPressed: (){
+              Navigator.pushNamed(context, '/third');
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ThirdScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("ThirdScreen - Day 25"),
+      ),
+      body: Center(
+        child: Container(
+          child: RaisedButton(
+            color: Colors.redAccent,
+            child: Text("Click to go back to the last Page"),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
+        ),
       ),
     );
   }
