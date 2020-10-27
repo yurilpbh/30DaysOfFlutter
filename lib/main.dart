@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 
 void main(){
   runApp(MyApp());
@@ -9,110 +8,140 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ImageSlider(),
-      //home: slider(),
-      //home: tooltip_widget(),
+      home: table_Widget()
+      //home: switch_Widget(),
     );
   }
 }
 
-class tooltip_widget extends StatelessWidget {
+class switch_Widget extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Tooltip"),
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Tooltip(
-          message: "Set Alarm",
-          waitDuration: Duration(seconds: 2),
-          showDuration: Duration(seconds: 3),
-          textStyle: TextStyle(
-            fontSize: 20,
-            color: Colors.white
-          ),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadiusDirectional.circular(20)
-          ),
-          child: FlatButton(
-            child: Icon(
-              Icons.alarm,
-              size: 150,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-class slider extends StatefulWidget {
-  @override
-  _sliderState createState() => _sliderState();
+  _switch_WidgetState createState() => _switch_WidgetState();
 }
 
-class _sliderState extends State<slider> {
-  int _value=6;
+class _switch_WidgetState extends State<switch_Widget> {
+  bool switchState = false;
+  var textValue = "Switch is OFF";
+  void display_state(bool value){
+    setState(() {
+      switchState = !switchState;
+      textValue = switchState == false ? "Switch is OFF" : "Switch is ON";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Slider"),
+        title: Text("Switch - Day 23"),
       ),
-      body: Row(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left:20),
-            child: Icon(
-              Icons.volume_up,
-              size: 50,
+          Center(
+            child: Container(
+              child: Transform.scale(
+                scale: 2,
+                child: Switch(
+                  onChanged: display_state,
+                  value: switchState,
+                  activeColor: Colors.green,
+                  inactiveThumbColor: Colors.red,
+                  activeTrackColor: Colors.greenAccent,
+                  inactiveTrackColor: Colors.redAccent,
+                ),
+              ),
             ),
           ),
-          Expanded(
-            child: Slider(
-              value: _value.toDouble(),
-              min: 1,
-              max: 20,
-              activeColor: Colors.green,
-              inactiveColor: Colors.grey,
-              label: "Set up volume",
-              onChanged: (double newvalue){
-                setState(() {
-                  _value = newvalue.round();
-                });
-              },
-            ),
-          )
+          Text('$textValue')
         ],
       ),
     );
   }
 }
 
-class ImageSlider extends StatelessWidget {
+class table_Widget extends StatefulWidget {
+  @override
+  _table_WidgetState createState() => _table_WidgetState();
+}
+
+class _table_WidgetState extends State<table_Widget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(40),
-      child: imageSlider(context),
-      constraints: BoxConstraints.expand(
-        height: 200
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Table - Day 23"),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(10),
+        child: Table(
+          defaultColumnWidth: FixedColumnWidth(100),
+          border: TableBorder.all(
+            color: Colors.blue,
+            width: 4,
+            style: BorderStyle.solid
+          ),
+          children: [
+            TableRow(
+              children: [
+                Column(
+                  children: [
+                    Text("Cel1")
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text("Cel2")
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text("Cel3")
+                  ],
+                ),
+              ]
+            ),
+            TableRow(
+                children: [
+                  Column(
+                    children: [
+                      Text("Cel4")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text("Cel5")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text("Cel6")
+                    ],
+                  ),
+                ]
+            ),
+            TableRow(
+                children: [
+                  Column(
+                    children: [
+                      Text("Cel7")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text("Cel8")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text("Cel9")
+                    ],
+                  ),
+                ]
+            ),
+          ],
+        ),
       ),
     );
   }
-}
-
-Swiper imageSlider(BuildContext context){
-  return new Swiper(
-    autoplay: true,
-    itemCount: 10,
-    itemBuilder: (BuildContext context, int index){
-      return Image.network(
-        "https://images.unsplash.com/photo-1500283281129-71909ce26948?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9"
-      );
-    },
-  );
 }
