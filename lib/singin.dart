@@ -1,49 +1,35 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SingupPage extends StatelessWidget {
+class SinginPage extends StatelessWidget {
 
-  TextEditingController _username = new TextEditingController();
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
-  
-  Future<void> signup() async {
+
+  Future<void> signin(BuildContext context) async {
     try{
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _email.text,
           password: _password.text
       );
     }catch(e){
       print(e);
     }
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
+      appBar: AppBar(
+        title: Text("Sing in"),
+      ),
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(top:100, left: 20, right: 20),
         child: Column(
           children: [
-            Container(
-              child: TextFormField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.person),
-                  labelText: "Enter Username: ",
-                  hintText: "Username"
-                ),
-                controller: _username,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(20)
-              ),
-              padding: EdgeInsets.only(bottom: 10, right: 5, left: 10),
-              margin: EdgeInsets.only(bottom: 20),
-            ),
             Container(
               child: TextFormField(
                 decoration: InputDecoration(
@@ -81,14 +67,14 @@ class SingupPage extends StatelessWidget {
               height: 50,
               width: 150,
               child: FlatButton(
-                child: Text("Sign up",
-                style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 16
+                child: Text("Sign in",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 16
                   ),
                 ),
                 onPressed: (){
-                  signup();
+                  signin(context);
                 },
               ),
               decoration: BoxDecoration(
@@ -98,6 +84,21 @@ class SingupPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Main Page")
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Text("Log in sucessefully!!!"),
       ),
     );
   }
