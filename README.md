@@ -1,4 +1,4 @@
-# flutter_app
+# 30 Days of Flutter
 
 At the end of all 30 das was developed an age calculator that shows:
   - How old are you in years, months, weeks, days, hours and minutes;
